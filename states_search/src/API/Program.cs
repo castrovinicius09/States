@@ -2,7 +2,9 @@ using API.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSwaggerDependencies();
+builder.Services
+    .AddSwaggerDependencies()
+    .AddInfraDependencies();
 
 WebApplication app = builder.Build();
 
