@@ -1,6 +1,7 @@
 ﻿using API.SettingsModels;
 using Application.Abstractions.HttpClients;
 using Infrastructure;
+using Infrastructure.HttpClients;
 using Microsoft.Extensions.Options;
 using Scrutor;
 
@@ -8,15 +9,17 @@ namespace API.Extensions
 {
     public static class InfraExtension
     {
-        public static void AddInfraDependencies(this IServiceCollection services)
+        public static IServiceCollection AddInfraDependencies(this IServiceCollection services)
         {
             services.AddHttpClient();
             services.DI();
+
+            return services;
         }
 
         private static IServiceCollection AddHttpClient(this IServiceCollection services)
         {
-            services.AddHttpClient<IStatesHttpClient>((serviceProvider, httpClient) =>
+            services.AddHttpClient<IStatesHttpClient, StatesHttpClient>((serviceProvider, httpClient) =>
             {
                 StateHttpSettings settings = serviceProvider.GetRequiredService<IOptions<StateHttpSettings>>().Value;
 
@@ -29,7 +32,8 @@ namespace API.Extensions
                         PooledConnectionLifetime = TimeSpan.FromMinutes(1)
                     };
                 })
-                .SetHandlerLifetime(Timeout.InfiniteTimeSpan);
+                .SetHandlerLifetime(Timeout.InfiniteTimeSpan)
+                .AddStandardHedgingHandler();
 
             return services;
         }

@@ -1,7 +1,7 @@
 ﻿namespace API.SettingsModels
 {
-    internal class StateHttpSettings
+    public class StateHttpSettings
     {
-        public string BaseUrl { get; internal set; }
+        public string BaseUrl { get; set; }
     }
 }
