@@ -21,7 +21,7 @@ namespace Application.Services
             {
                 List<StatesResponse> states = await _statesHttpClient.GetStatesAsync(cancellationToken);
 
-                List<StatesMessage> message = states.MapResponseToMessage();
+                StatesMessage message = states.MapResponseToMessage();
 
                 await _bus.PublishAsync(message);
 
