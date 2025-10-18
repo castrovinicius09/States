@@ -12,6 +12,8 @@ namespace API.Extensions
         {
             service.AddMassTransit(busConfigurator =>
             {
+                busConfigurator.SetKebabCaseEndpointNameFormatter();
+
                 busConfigurator.UsingRabbitMq((context, configuration) =>
                 {
                     RabbitMQSettings rabbitSettings = context.GetRequiredService<IOptions<RabbitMQSettings>>().Value;
