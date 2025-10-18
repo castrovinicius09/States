@@ -1,5 +1,4 @@
 using API.Extensions;
-using API.SettingsModels;
 using Application.Abstractions.Results;
 using Application.Abstractions.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +9,12 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
-builder.Services.Configure<StateHttpSettings>(
-    builder.Configuration.GetSection(nameof(StateHttpSettings)));
-
 builder.Services
+    .AddSettings(builder.Configuration)
     .AddSwaggerDependencies()
     .AddApplicationDependencies()
-    .AddInfraDependencies();
+    .AddInfraDependencies()
+    .AddRabbitMQ();
 
 WebApplication app = builder.Build();
 

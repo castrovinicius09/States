@@ -1,4 +1,6 @@
 ﻿using API.SettingsModels;
+using Application.Abstractions.Messaging;
+using Infrastructure.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Options;
 
@@ -23,6 +25,8 @@ namespace API.Extensions
                     configuration.ConfigureEndpoints(context);
                 });
             });
+
+            service.AddTransient<IMessageBus, StatesPublisher>();
 
             return service;
         }
