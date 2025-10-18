@@ -1,0 +1,34 @@
+services:
+  ambev.developerevaluation.rabbitmq:
+    container_name: ambev_developer_evaluation_rabbitmq
+    image: rabbitmq:3-management
+    hostname: ambev.developerevaluation.queue
+    volumes:
+        - rabbitmq_data:/var/lib/rabbitmq
+        - rabbitmq_log:/var/log/rabbitmq 
+    ports:
+        - 5672:5672
+        - 15672:15672
+    environment:
+        RABBITMQ_DEFAULT_USER: developer
+        RABBITMQ_DEFAULT_PASS: ev@luAt10n
+
+  ambev.developerevaluation.webapi:
+    container_name: ambev_developer_evaluation_webapi
+    image: ${DOCKER_REGISTRY-}ambevdeveloperevaluationwebapi
+    build:
+      context: .
+      dockerfile: src/Ambev.DeveloperEvaluation.WebApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080 
+      - ConnectionStrings__DefaultConnection=Host=ambev.developerevaluation.database;Port=5432;Database=developer_evaluation;Username=developer;Password=ev@luAt10n
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+volumes:
+  rabbitmq_data:
+  rabbitmq_log:
