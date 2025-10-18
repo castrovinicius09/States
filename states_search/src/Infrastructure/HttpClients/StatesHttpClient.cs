@@ -7,9 +7,10 @@ namespace Infrastructure.HttpClients
     internal sealed class StatesHttpClient : IStatesHttpClient
     {
         private readonly HttpClient _client;
-        public StatesHttpClient(IHttpClientFactory factory)
+
+        public StatesHttpClient(HttpClient client)
         {
-            _client = factory.CreateClient("states");
+            _client = client;
         }
 
         public async Task<List<StatesResponse>?> GetStatesAsync(CancellationToken cancellationToken)

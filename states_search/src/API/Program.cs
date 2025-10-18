@@ -11,6 +11,10 @@ WebApplication app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () =>
+{
+
+    return Results.Ok("API is running...");
+});
 
 await app.RunAsync();
