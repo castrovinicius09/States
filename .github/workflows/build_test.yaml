@@ -1,0 +1,46 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, develop, develop_search, develop_persistence ]
+  pull_request:
+    branches: [ main, develop, develop_search, develop_persistence ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Faz checkout do código
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Configura o .NET SDK (ajuste a versão conforme seu projeto)
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Restaura dependências
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Faz o build do projeto (sem restaurar novamente)
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+
+      # Roda os testes automatizados
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
+
+      # (Opcional) Gera relatório de cobertura
+      # Ative se você quiser visualizar métricas de testes no Actions
+      # - name: Run tests with coverage
+      #   run: dotnet test --no-build --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+
+      # (Opcional) Publica resultados no GitHub
+      # - name: Upload test results
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: test-results
+      #     path: '**/TestResults/*.trx'
