@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Middleware;
 using Application.Abstractions.Results;
 using Application.Abstractions.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,14 @@ builder.Services
     .AddInfraDependencies()
     .AddRabbitMQ();
 
+builder.Services.AddHttpContextAccessor();
+
 WebApplication app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseMiddleware<CorrelationIdMiddleware>();
 
 app.MapPost("/BuscarEstados", async ([FromServices] IStatesService statesService, CancellationToken cancellationToken) =>
 {
