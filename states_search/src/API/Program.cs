@@ -31,7 +31,7 @@ app.MapPost("/BuscarEstados", async ([FromServices] IStatesService statesService
     Result result = await statesService.GetStatesAsync(cancellationToken);
 
     return result.IsSuccess
-        ? Results.Ok("States fetched successfully.")
+        ? Results.Ok("Lista de Estados enviada")
         : Results.Problem(result.ErrorMessage);
 });
 
