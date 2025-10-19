@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Messaging;
+using Application.DTOs.Constants;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Serilog;
@@ -17,13 +18,13 @@ namespace Infrastructure.Messaging
 
         public async Task PublishAsync<T>(T message, CancellationToken cancellationToken = default) where T : class
         {
-            string? correlationId = _httpContextAccessor.HttpContext?.Items["CorrelationId"]?.ToString();
+            string? correlationId = _httpContextAccessor.HttpContext?.Items[ApplicationConstants.CorrelationId]?.ToString();
 
-            _logger.Information("Enviando lista de estados...");
+            _logger.Information("Enviando lista de estados para persistência");
 
             await _publishEndpoint.Publish(message, context =>
             {
-                context.Headers.Set("CorrelationId", correlationId);
+                context.Headers.Set(ApplicationConstants.CorrelationId, correlationId);
             });
         }
     }
