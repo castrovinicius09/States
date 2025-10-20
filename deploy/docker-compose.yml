@@ -13,6 +13,20 @@ services:
         RABBITMQ_DEFAULT_USER: admin
         RABBITMQ_DEFAULT_PASS: teste1234
 
+  state.persistence.minio:
+    image: minio/minio:latest
+    container_name: state.persistence.minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: teste1234
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+
   # state.search.webapi:
   #   container_name: state_search_webapi
   #   image: ${DOCKER_REGISTRY-}state_search_webapi
@@ -32,3 +46,4 @@ services:
 volumes:
   rabbitmq_data:
   rabbitmq_log:
+  minio_data:
