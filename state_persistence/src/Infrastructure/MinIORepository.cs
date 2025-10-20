@@ -36,7 +36,7 @@ namespace Infrastructure
 
             await _minioClient.PutObjectAsync(new PutObjectArgs()
                 .WithBucket(_settings.BucketName)
-                .WithObject(_settings.ObjectName)
+                .WithObject(_settings.ObjectName + DateTime.UtcNow.Date.ToString("ddMMyyyy"))
                 .WithStreamData(streamStates)
                 .WithObjectSize(streamStates.Length)
                 .WithContentType("application/json"));
