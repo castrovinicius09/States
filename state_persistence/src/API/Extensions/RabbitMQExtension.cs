@@ -1,4 +1,5 @@
-﻿using API.SettingsModels;
+﻿using Application.DTOs.SettingsModels;
+using Application.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Options;
 
@@ -10,7 +11,7 @@ namespace API.Extensions
         {
             service.AddMassTransit(busConfigurator =>
             {
-                busConfigurator.SetKebabCaseEndpointNameFormatter();
+                busConfigurator.AddConsumer<StatesConsumer>();
 
                 busConfigurator.UsingRabbitMq((context, configuration) =>
                 {
@@ -22,7 +23,10 @@ namespace API.Extensions
                         host.Password(rabbitSettings.Password);
                     });
 
-                    configuration.ConfigureEndpoints(context);
+                    configuration.ReceiveEndpoint(rabbitSettings.Queue, endpointConfig =>
+                    {
+                        endpointConfig.ConfigureConsumer<StatesConsumer>(context);
+                    });
                 });
             });
 

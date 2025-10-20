@@ -1,5 +1,5 @@
-﻿using API.SettingsModels;
-using Application.Abstractions.HttpClients;
+﻿using Application.Abstractions.HttpClients;
+using Application.DTOs.SettingsModels;
 using Infrastructure;
 using Infrastructure.HttpClients;
 using Microsoft.Extensions.Options;

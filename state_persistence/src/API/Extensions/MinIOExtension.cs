@@ -1,4 +1,4 @@
-﻿using API.SettingsModels;
+﻿using Application.DTOs.SettingsModels;
 using Minio;
 
 namespace API.Extensions

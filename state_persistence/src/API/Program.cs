@@ -11,6 +11,7 @@ builder.Services
     .AddApplicationDependencies()
     .AddInfraDependencies()
     .AddRabbitMQ()
+    .AddSwaggerDependencies()
     .AddMinIODependencies(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();
@@ -19,5 +20,10 @@ WebApplication app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.MapPost("/ChecarFila", (CancellationToken cancellationToken) =>
+{
+    return Results.Ok();
+});
 
 await app.RunAsync();

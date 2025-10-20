@@ -1,4 +1,4 @@
-﻿namespace API.SettingsModels
+﻿namespace Application.DTOs.SettingsModels
 {
     public class MinioSettings
     {
@@ -7,5 +7,6 @@
         public string SecretKey { get; set; } = string.Empty;
         public bool UseSSL { get; set; }
         public string BucketName { get; set; } = string.Empty;
+        public string ObjectName { get; set; } = string.Empty;
     }
 }

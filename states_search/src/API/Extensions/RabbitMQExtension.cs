@@ -1,5 +1,5 @@
-﻿using API.SettingsModels;
-using Application.Abstractions.Messaging;
+﻿using Application.Abstractions.Messaging;
+using Application.DTOs.SettingsModels;
 using Infrastructure.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Options;
@@ -12,8 +12,6 @@ namespace API.Extensions
         {
             service.AddMassTransit(busConfigurator =>
             {
-                busConfigurator.SetKebabCaseEndpointNameFormatter();
-
                 busConfigurator.UsingRabbitMq((context, configuration) =>
                 {
                     RabbitMQSettings rabbitSettings = context.GetRequiredService<IOptions<RabbitMQSettings>>().Value;
