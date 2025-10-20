@@ -25,6 +25,13 @@ namespace API.Extensions
 
                     configuration.ReceiveEndpoint(rabbitSettings.Queue, endpointConfig =>
                     {
+                        endpointConfig.ConfigureConsumeTopology = false;
+
+                        endpointConfig.Bind("Application.DTOs.States.Messages:StatesMessage", bind =>
+                        {
+                            bind.ExchangeType = "fanout";
+                        });
+
                         endpointConfig.ConfigureConsumer<StatesConsumer>(context);
                     });
                 });
