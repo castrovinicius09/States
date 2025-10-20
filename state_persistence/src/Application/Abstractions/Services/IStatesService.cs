@@ -1,5 +1,5 @@
 ﻿using Application.Abstractions.Results;
-using Application.Messaging;
+using Application.DTOs.States.Messages;
 
 namespace Application.Abstractions.Services
 {

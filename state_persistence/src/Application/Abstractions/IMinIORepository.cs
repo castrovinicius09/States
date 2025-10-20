@@ -2,6 +2,6 @@
 {
     public interface IMinIORepository
     {
-        Task SaveJsonAsync(MemoryStream statesList);
+        Task SaveJsonAsync(string statesList);
     }
 }

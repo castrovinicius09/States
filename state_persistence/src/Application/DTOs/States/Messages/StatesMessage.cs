@@ -1,4 +1,4 @@
-﻿namespace Application.Messaging
+﻿namespace Application.DTOs.States.Messages
 {
     public class StatesMessage
     {

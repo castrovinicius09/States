@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Services;
 using Application.DTOs.Constants;
+using Application.DTOs.States.Messages;
 using MassTransit;
 using Serilog;
 

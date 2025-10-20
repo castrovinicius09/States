@@ -1,8 +1,8 @@
 ﻿using Application.Abstractions;
 using Application.Abstractions.Results;
 using Application.Abstractions.Services;
+using Application.DTOs.States.Messages;
 using Application.Mapping;
-using Application.Messaging;
 using Serilog;
 
 namespace Application.Services
@@ -20,7 +20,7 @@ namespace Application.Services
             {
                 _logger.Information("Início do processamento da mensagem");
 
-                MemoryStream jsonStatesList = message.MapMessageToJson();
+                string jsonStatesList = message.MapMessageToJson();
 
                 await _minioRepository.SaveJsonAsync(jsonStatesList);
 

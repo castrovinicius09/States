@@ -17,6 +17,7 @@ namespace API.Extensions
             service.AddMinio(configureClient => configureClient
                 .WithEndpoint(minioSettings.Endpoint)
                 .WithCredentials(minioSettings.AccessKey, minioSettings.SecretKey)
+                .WithSSL(minioSettings.UseSSL)
                 .Build());
 
             return service;
