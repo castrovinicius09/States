@@ -10,7 +10,8 @@ builder.Services
     .AddSettings(builder.Configuration)
     .AddApplicationDependencies()
     .AddInfraDependencies()
-    .AddRabbitMQ();
+    .AddRabbitMQ()
+    .AddMinIODependencies();
 
 builder.Services.AddHttpContextAccessor();
 

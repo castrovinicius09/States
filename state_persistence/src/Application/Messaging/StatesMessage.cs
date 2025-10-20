@@ -1,14 +1,19 @@
-﻿namespace Application.DTOs.States.Responses
+﻿namespace Application.Messaging
 {
-    public class StatesResponse
+    public class StatesMessage
+    {
+        public List<State> StatesList { get; set; } = new();
+    }
+
+    public class State
     {
         public int Id { get; set; }
         public string Sigla { get; set; } = string.Empty;
         public string Nome { get; set; } = string.Empty;
-        public RegiaoResponse Regiao { get; set; } = new RegiaoResponse();
+        public Regiao Regiao { get; set; } = new Regiao();
     }
 
-    public class RegiaoResponse
+    public class Regiao
     {
         public int Id { get; set; }
         public string Sigla { get; set; } = string.Empty;

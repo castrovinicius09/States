@@ -7,6 +7,7 @@ namespace API.Extensions
         public static IServiceCollection AddSettings(this IServiceCollection service, IConfiguration configuration)
         {
             service.Configure<RabbitMQSettings>(configuration.GetSection("RabbitMQ"));
+            service.Configure<MinioSettings>(configuration.GetSection("Minio"));
 
             return service;
         }
