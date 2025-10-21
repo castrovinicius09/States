@@ -27,7 +27,7 @@ namespace Infrastructure
             await _minioClient.GetObjectAsync(
                 new GetObjectArgs()
                     .WithBucket(_settings.BucketName)
-                    .WithObject(_settings.ObjectName)
+                    .WithObject(nomeArquivo)
                     .WithCallbackStream(s => s.CopyTo(stream)));
 
             stream.Position = 0; // volta para o início do stream
