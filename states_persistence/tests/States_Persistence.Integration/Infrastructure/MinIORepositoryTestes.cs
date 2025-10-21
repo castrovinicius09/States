@@ -23,9 +23,11 @@ namespace States_Persistence.Integration.Infrastructure
 
         public MinIORepositoryTestes()
         {
+            bool isCi = Environment.GetEnvironmentVariable("CI") == "true";
+
             IOptions<MinioSettings> settings = Options.Create(new MinioSettings
             {
-                Endpoint = "localhost:9000",
+                Endpoint = isCi ? "minio:9000" : "localhost:9000",
                 AccessKey = "admin",
                 SecretKey = "teste1234",
                 BucketName = "test-bucket",
