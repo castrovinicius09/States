@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<UserSecretsId>70625b4f-bf0a-4ee4-bad7-e264d39e47f3</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerfileContext>.</DockerfileContext>
+		<DockerfileContext>..\..</DockerfileContext>
 	</PropertyGroup>
 	<PropertyGroup>
 		<PreserveCompilationContext>true</PreserveCompilationContext>

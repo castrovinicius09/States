@@ -1,21 +1,24 @@
+version: "3.9"
+
 services:
   state.search.rabbitmq:
     container_name: state_search_rabbitmq
     image: rabbitmq:3-management
     hostname: state.search.queue
     volumes:
-        - rabbitmq_data:/var/lib/rabbitmq
-        - rabbitmq_log:/var/log/rabbitmq 
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_log:/var/log/rabbitmq
     ports:
-        - 5672:5672
-        - 15672:15672
+      - 5672:5672
+      - 15672:15672
     environment:
-        RABBITMQ_DEFAULT_USER: admin
-        RABBITMQ_DEFAULT_PASS: teste1234
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: teste1234
+    restart: unless-stopped
 
   state.persistence.minio:
+    container_name: state_persistence_minio
     image: minio/minio:latest
-    container_name: state.persistence.minio
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -27,21 +30,31 @@ services:
     command: server /data --console-address ":9001"
     restart: unless-stopped
 
-  # state.search.webapi:
-  #   container_name: state_search_webapi
-  #   image: ${DOCKER_REGISTRY-}state_search_webapi
-  #   build:
-  #     context: .
-  #     dockerfile: src/Ambev.DeveloperEvaluation.WebApi/Dockerfile
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - ASPNETCORE_URLS=http://+:8080 
-  #     - ConnectionStrings__DefaultConnection=Host=ambev.developerevaluation.database;Port=5432;Database=developer_evaluation;Username=developer;Password=ev@luAt10n
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-  #     - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+  state.search.webapi:
+    container_name: state_search_webapi
+    build:
+      context: ../states_search
+      dockerfile: src/API/Dockerfile
+    image: state_search_webapi
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    restart: unless-stopped
+
+  state.persistence.webapi:
+    container_name: state_persistence_webapi
+    build:
+      context: ../states_persistence
+      dockerfile: src/API/Dockerfile
+    image: state_persistence_webapi
+    ports:
+      - "8081:8080"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    restart: unless-stopped
 
 volumes:
   rabbitmq_data:
