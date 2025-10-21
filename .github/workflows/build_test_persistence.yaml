@@ -2,9 +2,9 @@ name: Build and Test PERSISTENCE
 
 on:
   push:
-    branches: [ "**" ]
+    branches: ["**"]
   pull_request:
-    branches: [ "**" ]
+    branches: ["**"]
 
 jobs:
   build-and-test-persistence:
@@ -17,8 +17,8 @@ jobs:
           - 9000:9000
           - 9001:9001
         env:
-          MINIO_ROOT_USER: minioadmin
-          MINIO_ROOT_PASSWORD: minioadmin
+          MINIO_ROOT_USER: admin
+          MINIO_ROOT_PASSWORD: teste1234
         options: >-
           --health-cmd "curl -f http://localhost:9000/minio/health/ready || exit 1"
           --health-interval 10s
@@ -35,7 +35,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: "8.0.x"
 
       # Restaura dependências
       - name: Restore dependencies
