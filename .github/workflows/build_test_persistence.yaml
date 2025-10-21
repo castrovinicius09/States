@@ -2,14 +2,14 @@ name: Build and Test PERSISTENCE
 
 on:
   push:
-    branches: [ main, develop, develop_persistence ]
+    branches: [ "**" ]
   pull_request:
-    branches: [ main, develop, develop_persistence ]
+    branches: [ "**" ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
+
     services:
       minio:
         image: quay.io/minio/minio
