@@ -16,7 +16,9 @@ namespace API.Extensions
                 {
                     RabbitMQSettings rabbitSettings = context.GetRequiredService<IOptions<RabbitMQSettings>>().Value;
 
-                    configuration.Host(rabbitSettings.Host, host =>
+                    string rabbitHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? rabbitSettings.Host;
+
+                    configuration.Host(rabbitHost, ushort.Parse(rabbitSettings.Port.ToString()), "/", host =>
                     {
                         host.Username(rabbitSettings.Username);
                         host.Password(rabbitSettings.Password);

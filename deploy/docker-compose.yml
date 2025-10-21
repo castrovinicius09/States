@@ -37,6 +37,7 @@ services:
       dockerfile: src/API/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - RABBITMQ_HOST=state.search.rabbitmq
     image: state_search_webapi
     ports:
       - "8080:8080"
@@ -52,6 +53,7 @@ services:
       dockerfile: src/API/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - RABBITMQ_HOST=state.search.rabbitmq
     image: state_persistence_webapi
     ports:
       - "8081:8080"
