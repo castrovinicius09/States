@@ -23,19 +23,19 @@ jobs:
 
       # Restaura dependências
       - name: Restore dependencies
-        run: |
+        run: 
           dotnet restore ./states_search/States_Search.sln
           dotnet restore ./states_persistence/States_Persistence.sln
 
       # Faz o build do projeto (sem restaurar novamente)
       - name: Build solution
-        run: |
+        run: 
           dotnet build ./states_search/States_Search.sln --no-restore --configuration Release
           dotnet build ./states_persistence/States_Persistence.sln --no-restore --configuration Release
 
       # Roda os testes automatizados
       - name: Run tests
-        run: |
+        run: 
           dotnet test ./states_search/States_Search.sln --no-build --configuration Release --verbosity normal
           dotnet test ./states_persistence/States_Persistence.sln --no-build --configuration Release --verbosity normal
 
