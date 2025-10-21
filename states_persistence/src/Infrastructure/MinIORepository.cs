@@ -89,22 +89,18 @@ namespace Infrastructure
         {
             _logger.Information("Salvando arquivo JSON no MinIO...");
 
-            //BucketExistsArgs existingArgs = new BucketExistsArgs().WithBucket(_settings.BucketName);
-            //if (!await _minioClient.BucketExistsAsync(existingArgs))
-            //{
-            //    MakeBucketArgs newArgs = new MakeBucketArgs().WithBucket(_settings.BucketName);
-
-            //    await _minioClient.MakeBucketAsync(newArgs);
-            //}
-
             using var streamStates = new MemoryStream(Encoding.UTF8.GetBytes(statesList));
 
             _logger.Information("Enviando arquivo {ObjectName} com {Length} bytes para o bucket {BucketName}.",
                 _settings.ObjectName, streamStates.Length, _settings.BucketName);
 
+            //para evitar persistencia e incremento automatico apenas para testes
+            var random = new Random();
+            string randomNumber = random.Next(0, 1000).ToString();
+
             await _minioClient.PutObjectAsync(new PutObjectArgs()
                 .WithBucket(_settings.BucketName)
-                .WithObject(_settings.ObjectName + DateTime.UtcNow.Date.ToString("ddMMyyyy"))
+                .WithObject($"{_settings.ObjectName}{DateTime.UtcNow.Date.ToString("ddMMyyyy")}_{randomNumber}")
                 .WithStreamData(streamStates)
                 .WithObjectSize(streamStates.Length)
                 .WithContentType("application/json"));
