@@ -9,14 +9,29 @@ using Serilog;
 
 namespace Infrastructure
 {
-    internal sealed class MinIORepository(
-        ILogger logger,
-        IMinioClient minioClient,
-        IOptions<MinioSettings> settings) : IMinIORepository
+    internal sealed class MinIORepository : IMinIORepository
     {
-        private readonly ILogger _logger = logger;
-        private readonly IMinioClient _minioClient = minioClient;
-        private readonly MinioSettings _settings = settings.Value;
+        private readonly ILogger _logger;
+        private readonly IMinioClient _minioClient;
+        private readonly MinioSettings _settings;
+
+        public MinIORepository(
+            ILogger logger,
+            IMinioClient minioClient,
+            IOptions<MinioSettings> settings)
+        {
+            _logger = logger;
+            _minioClient = minioClient;
+            _settings = settings.Value;
+
+            BucketExistsArgs existingArgs = new BucketExistsArgs().WithBucket(_settings.BucketName);
+            if (!_minioClient.BucketExistsAsync(existingArgs).Result)
+            {
+                MakeBucketArgs newArgs = new MakeBucketArgs().WithBucket(_settings.BucketName);
+
+                _minioClient.MakeBucketAsync(newArgs);
+            }
+        }
 
         public async Task<MemoryStream> GetFileByNameAsync(string nomeArquivo)
         {
@@ -30,7 +45,7 @@ namespace Infrastructure
                     .WithObject(nomeArquivo)
                     .WithCallbackStream(s => s.CopyTo(stream)));
 
-            stream.Position = 0; // volta para o início do stream
+            stream.Position = 0;
             return stream;
         }
 
@@ -74,13 +89,13 @@ namespace Infrastructure
         {
             _logger.Information("Salvando arquivo JSON no MinIO...");
 
-            BucketExistsArgs existingArgs = new BucketExistsArgs().WithBucket(_settings.BucketName);
-            if (!await _minioClient.BucketExistsAsync(existingArgs))
-            {
-                MakeBucketArgs newArgs = new MakeBucketArgs().WithBucket(_settings.BucketName);
+            //BucketExistsArgs existingArgs = new BucketExistsArgs().WithBucket(_settings.BucketName);
+            //if (!await _minioClient.BucketExistsAsync(existingArgs))
+            //{
+            //    MakeBucketArgs newArgs = new MakeBucketArgs().WithBucket(_settings.BucketName);
 
-                await _minioClient.MakeBucketAsync(newArgs);
-            }
+            //    await _minioClient.MakeBucketAsync(newArgs);
+            //}
 
             using var streamStates = new MemoryStream(Encoding.UTF8.GetBytes(statesList));
 
