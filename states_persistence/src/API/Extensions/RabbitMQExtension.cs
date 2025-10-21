@@ -17,13 +17,16 @@ namespace API.Extensions
                 {
                     RabbitMQSettings rabbitSettings = context.GetRequiredService<IOptions<RabbitMQSettings>>().Value;
 
-                    string rabbitHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? rabbitSettings.Host;
+                    string host = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"
+                    ? "state.search.rabbitmq" // dentro do Docker
+                    : "localhost";
 
-                    configuration.Host(rabbitHost, ushort.Parse(rabbitSettings.Port.ToString()), "/", host =>
+                    configuration.Host(host, ushort.Parse(rabbitSettings.Port), "/", host =>
                     {
                         host.Username(rabbitSettings.Username);
                         host.Password(rabbitSettings.Password);
                     });
+
 
                     configuration.ReceiveEndpoint(rabbitSettings.Queue, endpointConfig =>
                     {
