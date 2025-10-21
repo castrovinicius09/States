@@ -18,6 +18,22 @@ namespace Infrastructure
         private readonly IMinioClient _minioClient = minioClient;
         private readonly MinioSettings _settings = settings.Value;
 
+        public async Task<MemoryStream> GetFileByNameAsync(string nomeArquivo)
+        {
+            _logger.Information("Buscar arquivo {0} no bucket {1}", nomeArquivo, _settings.BucketName);
+
+            var stream = new MemoryStream();
+
+            await _minioClient.GetObjectAsync(
+                new GetObjectArgs()
+                    .WithBucket(_settings.BucketName)
+                    .WithObject(_settings.ObjectName)
+                    .WithCallbackStream(s => s.CopyTo(stream)));
+
+            stream.Position = 0; // volta para o início do stream
+            return stream;
+        }
+
         public async Task<List<string>> GetFilesNamesListAsync(CancellationToken cancellationToken)
         {
             _logger.Information("Buscar lista de arquivos no bucket {0}", _settings.BucketName);

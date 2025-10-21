@@ -1,0 +1,272 @@
+[
+  {
+    "Id": 11,
+    "Sigla": "RO",
+    "Nome": "Rond\u00F4nia",
+    "Regiao": {
+      "Id": 1,
+      "Sigla": "N",
+      "Nome": "Norte"
+    }
+  },
+  {
+    "Id": 12,
+    "Sigla": "AC",
+    "Nome": "Acre",
+    "Regiao": {
+      "Id": 1,
+      "Sigla": "N",
+      "Nome": "Norte"
+    }
+  },
+  {
+    "Id": 13,
+    "Sigla": "AM",
+    "Nome": "Amazonas",
+    "Regiao": {
+      "Id": 1,
+      "Sigla": "N",
+      "Nome": "Norte"
+    }
+  },
+  {
+    "Id": 14,
+    "Sigla": "RR",
+    "Nome": "Roraima",
+    "Regiao": {
+      "Id": 1,
+      "Sigla": "N",
+      "Nome": "Norte"
+    }
+  },
+  {
+    "Id": 15,
+    "Sigla": "PA",
+    "Nome": "Par\u00E1",
+    "Regiao": {
+      "Id": 1,
+      "Sigla": "N",
+      "Nome": "Norte"
+    }
+  },
+  {
+    "Id": 16,
+    "Sigla": "AP",
+    "Nome": "Amap\u00E1",
+    "Regiao": {
+      "Id": 1,
+      "Sigla": "N",
+      "Nome": "Norte"
+    }
+  },
+  {
+    "Id": 17,
+    "Sigla": "TO",
+    "Nome": "Tocantins",
+    "Regiao": {
+      "Id": 1,
+      "Sigla": "N",
+      "Nome": "Norte"
+    }
+  },
+  {
+    "Id": 21,
+    "Sigla": "MA",
+    "Nome": "Maranh\u00E3o",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 22,
+    "Sigla": "PI",
+    "Nome": "Piau\u00ED",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 23,
+    "Sigla": "CE",
+    "Nome": "Cear\u00E1",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 24,
+    "Sigla": "RN",
+    "Nome": "Rio Grande do Norte",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 25,
+    "Sigla": "PB",
+    "Nome": "Para\u00EDba",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 26,
+    "Sigla": "PE",
+    "Nome": "Pernambuco",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 27,
+    "Sigla": "AL",
+    "Nome": "Alagoas",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 28,
+    "Sigla": "SE",
+    "Nome": "Sergipe",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 29,
+    "Sigla": "BA",
+    "Nome": "Bahia",
+    "Regiao": {
+      "Id": 2,
+      "Sigla": "NE",
+      "Nome": "Nordeste"
+    }
+  },
+  {
+    "Id": 31,
+    "Sigla": "MG",
+    "Nome": "Minas Gerais",
+    "Regiao": {
+      "Id": 3,
+      "Sigla": "SE",
+      "Nome": "Sudeste"
+    }
+  },
+  {
+    "Id": 32,
+    "Sigla": "ES",
+    "Nome": "Esp\u00EDrito Santo",
+    "Regiao": {
+      "Id": 3,
+      "Sigla": "SE",
+      "Nome": "Sudeste"
+    }
+  },
+  {
+    "Id": 33,
+    "Sigla": "RJ",
+    "Nome": "Rio de Janeiro",
+    "Regiao": {
+      "Id": 3,
+      "Sigla": "SE",
+      "Nome": "Sudeste"
+    }
+  },
+  {
+    "Id": 35,
+    "Sigla": "SP",
+    "Nome": "S\u00E3o Paulo",
+    "Regiao": {
+      "Id": 3,
+      "Sigla": "SE",
+      "Nome": "Sudeste"
+    }
+  },
+  {
+    "Id": 41,
+    "Sigla": "PR",
+    "Nome": "Paran\u00E1",
+    "Regiao": {
+      "Id": 4,
+      "Sigla": "S",
+      "Nome": "Sul"
+    }
+  },
+  {
+    "Id": 42,
+    "Sigla": "SC",
+    "Nome": "Santa Catarina",
+    "Regiao": {
+      "Id": 4,
+      "Sigla": "S",
+      "Nome": "Sul"
+    }
+  },
+  {
+    "Id": 43,
+    "Sigla": "RS",
+    "Nome": "Rio Grande do Sul",
+    "Regiao": {
+      "Id": 4,
+      "Sigla": "S",
+      "Nome": "Sul"
+    }
+  },
+  {
+    "Id": 50,
+    "Sigla": "MS",
+    "Nome": "Mato Grosso do Sul",
+    "Regiao": {
+      "Id": 5,
+      "Sigla": "CO",
+      "Nome": "Centro-Oeste"
+    }
+  },
+  {
+    "Id": 51,
+    "Sigla": "MT",
+    "Nome": "Mato Grosso",
+    "Regiao": {
+      "Id": 5,
+      "Sigla": "CO",
+      "Nome": "Centro-Oeste"
+    }
+  },
+  {
+    "Id": 52,
+    "Sigla": "GO",
+    "Nome": "Goi\u00E1s",
+    "Regiao": {
+      "Id": 5,
+      "Sigla": "CO",
+      "Nome": "Centro-Oeste"
+    }
+  },
+  {
+    "Id": 53,
+    "Sigla": "DF",
+    "Nome": "Distrito Federal",
+    "Regiao": {
+      "Id": 5,
+      "Sigla": "CO",
+      "Nome": "Centro-Oeste"
+    }
+  }
+]

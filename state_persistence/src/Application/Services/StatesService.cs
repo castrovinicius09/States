@@ -14,6 +14,31 @@ namespace Application.Services
         private readonly ILogger _logger = logger;
         private readonly IMinIORepository _minioRepository = minioRepository;
 
+        public async Task<Result> GetFileByNameAsync(string nomeArquivo, CancellationToken cancellationToken)
+        {
+            try
+            {
+                _logger.Information("Início da busca de arquivo pelo nome {0}", nomeArquivo);
+
+                MemoryStream stream = await _minioRepository.GetFileByNameAsync(nomeArquivo);
+
+                if (stream is null)
+                {
+                    return Result.Error("Erro ao buscar arquivo {0}", nomeArquivo);
+                }
+
+                _logger.Information("Fim da busca");
+
+                return Result.Success(stream);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Erro ao fazer busca: {0}", ex.Message);
+
+                return Result.Error(ex.Message);
+            }
+        }
+
         public async Task<Result> GetStatesFileNamesAsync(CancellationToken cancellationToken)
         {
             try

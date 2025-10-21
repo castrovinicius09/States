@@ -33,4 +33,13 @@ app.MapPost("/BuscarEstados", async ([FromServices] IStatesService statesService
         : Results.Problem(result.ErrorMessage);
 });
 
+app.MapGet("/BaixarArquivos", async ([FromServices] IStatesService statesService, string nomeArquivo, CancellationToken cancellationToken) =>
+{
+    Result result = await statesService.GetFileByNameAsync(nomeArquivo, cancellationToken);
+
+    return result.IsSuccess
+        ? Results.File(fileStream: (Stream)result.Data!, "application/octet-stream", nomeArquivo)
+        : Results.Problem(result.ErrorMessage);
+});
+
 await app.RunAsync();
