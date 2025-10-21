@@ -27,7 +27,7 @@ namespace States_Persistence.Integration.Infrastructure
 
             IOptions<MinioSettings> settings = Options.Create(new MinioSettings
             {
-                Endpoint = isCi ? "minio:9000" : "localhost:9000",
+                Endpoint = !isCi ? "localhost:9000" : "minio:9000",
                 AccessKey = "admin",
                 SecretKey = "teste1234",
                 BucketName = "test-bucket",
