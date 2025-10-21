@@ -1,6 +1,5 @@
-﻿using Application.Abstractions.Messaging;
-using Application.DTOs.SettingsModels;
-using Infrastructure.Messaging;
+﻿using Application.DTOs.SettingsModels;
+using Application.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Options;
 
@@ -12,6 +11,8 @@ namespace API.Extensions
         {
             service.AddMassTransit(busConfigurator =>
             {
+                busConfigurator.AddConsumer<StatesConsumer>();
+
                 busConfigurator.UsingRabbitMq((context, configuration) =>
                 {
                     RabbitMQSettings rabbitSettings = context.GetRequiredService<IOptions<RabbitMQSettings>>().Value;
@@ -22,11 +23,19 @@ namespace API.Extensions
                         host.Password(rabbitSettings.Password);
                     });
 
-                    configuration.ConfigureEndpoints(context);
+                    configuration.ReceiveEndpoint(rabbitSettings.Queue, endpointConfig =>
+                    {
+                        endpointConfig.ConfigureConsumeTopology = false;
+
+                        endpointConfig.Bind("Application.DTOs.States.Messages:StatesMessage", bind =>
+                        {
+                            bind.ExchangeType = "fanout";
+                        });
+
+                        endpointConfig.ConfigureConsumer<StatesConsumer>(context);
+                    });
                 });
             });
-
-            service.AddTransient<IMessageBus, StatesPublisher>();
 
             return service;
         }

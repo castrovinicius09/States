@@ -13,9 +13,9 @@ namespace API.Extensions
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "State Search",
+                    Title = "State Persistence",
                     Version = "v1",
-                    Description = "API para buscar lista de estados do Brasil"
+                    Description = "API para persistir lista de Estados brasileiros"
                 });
             });
 

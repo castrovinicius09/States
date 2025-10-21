@@ -1,13 +1,13 @@
-name: Build and Test
+name: Build and Test SEARCH
 
 on:
   push:
-    branches: [ main, develop, develop_search, develop_persistence ]
+    branches: ["**"]
   pull_request:
-    branches: [ main, develop, develop_search, develop_persistence ]
+    branches: ["**"]
 
 jobs:
-  build-and-test:
+  build-and-test-search:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: "8.0.x"
 
       # Restaura dependências
       - name: Restore dependencies

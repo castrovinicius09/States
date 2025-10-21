@@ -1,4 +1,4 @@
-﻿namespace API.SettingsModels
+﻿namespace Application.DTOs.SettingsModels
 {
     public class StateHttpSettings
     {
