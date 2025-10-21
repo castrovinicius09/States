@@ -3,6 +3,7 @@ using Application.Abstractions;
 using Application.DTOs.SettingsModels;
 using Microsoft.Extensions.Options;
 using Minio;
+using Minio.DataModel;
 using Minio.DataModel.Args;
 using Serilog;
 
@@ -16,6 +17,42 @@ namespace Infrastructure
         private readonly ILogger _logger = logger;
         private readonly IMinioClient _minioClient = minioClient;
         private readonly MinioSettings _settings = settings.Value;
+
+        public async Task<List<string>> GetFilesNamesListAsync(CancellationToken cancellationToken)
+        {
+            _logger.Information("Buscar lista de arquivos no bucket {0}", _settings.BucketName);
+
+            var files = new List<string>();
+
+            ListObjectsArgs listArgs = new ListObjectsArgs()
+                .WithBucket(_settings.BucketName)
+                .WithRecursive(true);
+
+            IObservable<Item> observable = _minioClient.ListObjectsAsync(listArgs);
+
+            var completion = new TaskCompletionSource();
+
+            IDisposable subscription = observable.Subscribe(
+                item =>
+                {
+                    files.Add(item.Key);
+                },
+                ex =>
+                {
+                    _logger.Error(ex, "Erro ao listar arquivos do MinIO.");
+                    completion.SetException(ex);
+                },
+                () =>
+                {
+                    completion.SetResult();
+                });
+
+            await completion.Task;
+
+            _logger.Information("Fim da busca no bucket {0}", _settings.BucketName);
+
+            return files;
+        }
 
         public async Task SaveJsonAsync(string statesList)
         {

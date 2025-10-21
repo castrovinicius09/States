@@ -14,6 +14,26 @@ namespace Application.Services
         private readonly ILogger _logger = logger;
         private readonly IMinIORepository _minioRepository = minioRepository;
 
+        public async Task<Result> GetStatesFileNamesAsync(CancellationToken cancellationToken)
+        {
+            try
+            {
+                _logger.Information("Início da busca de arquivos no minIO");
+
+                List<string> list = await _minioRepository.GetFilesNamesListAsync(cancellationToken);
+
+                _logger.Information("Fim da busca");
+
+                return Result.Success(list);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Erro ao fazer busca: {0}", ex.Message);
+
+                return Result.Error(ex.Message);
+            }
+        }
+
         public async Task<Result> SaveStatesAsync(StatesMessage message, CancellationToken cancellationToken = default)
         {
             try

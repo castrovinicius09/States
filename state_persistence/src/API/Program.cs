@@ -1,4 +1,7 @@
 using API.Extensions;
+using Application.Abstractions.Results;
+using Application.Abstractions.Services;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -21,9 +24,13 @@ WebApplication app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapPost("/ChecarFila", (CancellationToken cancellationToken) =>
+app.MapPost("/BuscarEstados", async ([FromServices] IStatesService statesService, CancellationToken cancellationToken) =>
 {
-    return Results.Ok();
+    Result result = await statesService.GetStatesFileNamesAsync(cancellationToken);
+
+    return result.IsSuccess
+        ? Results.Ok(result.Data)
+        : Results.Problem(result.ErrorMessage);
 });
 
 await app.RunAsync();
