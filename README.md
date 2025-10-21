@@ -1,4 +1,4 @@
-# Developer Test Project
+# Projeto de Teste
 
 Este projeto tem o intuito de mostrar a comunicação entre serviços atraves de mensageria.
 
@@ -12,12 +12,12 @@ O serviço é dividido em dois sistemas "Search" e "Persistence", que faz uma bu
 * O Primeiro sistema "SEARCH" deve apenas buscar a lista e enviar por mensageria ao segundo sistema "PERSISTENCE"
 * O segundo sistema "PERSISTENCE" converte a lista em JSON e salva em arquivo no minIO
 
-## Requirements
+## Requisitos técnicos
 tenha certeza que voce tenha as seguintes ferramentas para executar o projeto.
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) (with Docker Compose enabled)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) (or higher)
 
-## executando o projeto
+## Executando o projeto
 Esta sessão descreve como executar o projeto.
 
 Veja [Executando o projeto](/.doc/running_project.md)
