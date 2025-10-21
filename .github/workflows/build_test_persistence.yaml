@@ -7,7 +7,7 @@ on:
     branches: [ "**" ]
 
 jobs:
-  build-and-test:
+  build-and-test-persistence:
     runs-on: ubuntu-latest
 
     services:

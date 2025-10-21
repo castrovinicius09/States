@@ -7,7 +7,7 @@ on:
     branches: [ "**" ]
 
 jobs:
-  build-and-test:
+  build-and-test-search:
     runs-on: ubuntu-latest
 
     steps:
