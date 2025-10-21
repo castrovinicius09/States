@@ -1,75 +1,38 @@
-# Developer Evaluation Project
+# Developer Test Project
 
-This API was based on `DDD` principles do create a Sales CRUD.  
-When referencing entities from other domains, the `External Identities` pattern was applied together with denormalization of entity descriptions, ensuring consistency while simplifying queries and reporting.  
-This approach was adopted to implement a complete CRUD for managing sales records, providing clear and structured access to the required information.
+Este projeto tem o intuito de mostrar a comunicação entre serviços atraves de mensageria.
 
-If you want to take a look in the future ideas for this project take a look [here](/.doc/backlog.md)
+Se voce quer dar uma olhada nas futuras implementações clique [aqui](/.doc/backlog.md)
 
-## Business Rules
+## Regra de negocio
+O serviço é dividido em dois sistemas "Search" e "Persistence", que faz uma busca pelos estados do Brasil em um serviço publico externo, e persiste do nosso lado em Json.
 
-### Entity fields
+### Regras
 
-* Sale number
-* Date when the sale was made
-* Customer
-* Total sale amount
-* Branch where the sale was made
-* Products
-* Quantities
-* Unit prices
-* Discounts
-* Total amount for each item
-* Cancelled/Not Cancelled
-
-### Rules
-
-* Purchases above 4 identical items have a 10% discount
-* Purchases between 10 and 20 identical items have a 20% discount
-* It's not possible to sell above 20 identical items
-* Purchases below 4 items cannot have a discount
-
-These business rules define quantity-based discounting tiers and limitations:
-
-1. Discount Tiers:
-   - 4+ items: 10% discount
-   - 10-20 items: 20% discount
-
-2. Restrictions:
-   - Maximum limit: 20 items per product
-   - No discounts allowed for quantities below 4 items
+* O Primeiro sistema "SEARCH" deve apenas buscar a lista e enviar por mensageria ao segundo sistema "PERSISTENCE"
+* O segundo sistema "PERSISTENCE" converte a lista em JSON e salva em arquivo no minIO
 
 ## Requirements
-Make sure you have the following installed before running the project:
+tenha certeza que voce tenha as seguintes ferramentas para executar o projeto.
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) (with Docker Compose enabled)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) (or higher)
 
-## Running the Project
-This section provides instruction to run the project and see the new api sale endpoints.
+## executando o projeto
+Esta sessão descreve como executar o projeto.
 
-See [Running the Project](/.doc/running_project.md)
-
-## Overview
-This section provides a high-level overview of the project and the various skills and competencies it aims to assess for developer candidates. 
-
-See [Overview](/.doc/overview.md)
+Veja [Executando o projeto](/.doc/running_project.md)
 
 ## Tech Stack
-This section lists the key technologies used in the project, including the backend, testing, frontend, and database components. 
+Esta seção lista as principais tecnologias utilizadas no projeto, incluindo os componentes de backend, testes, e armazenamento.
 
-See [Tech Stack](/.doc/tech-stack.md)
+Veja [Tech Stack](/.doc/tech-stack.md)
 
-## Frameworks
-This section outlines the frameworks and libraries that are leveraged in the project to enhance development productivity and maintainability. 
+## Estrutura do projeto
+Esta seção descreve a estrutura geral e a organização dos arquivos e diretórios do projeto.
 
-See [Frameworks](/.doc/frameworks.md)
-
-## Project Structure
-This section describes the overall structure and organization of the project files and directories. 
-
-See [Project Structure](/.doc/project-structure.md)
+Veja [Estrutura do projeto](/.doc/project-structure.md)
 
 ## Backlog
 This future implementations for this API. 
 
-See [Backlog](/.doc/backlog.md)
+Veja [Backlog](/.doc/backlog.md)
