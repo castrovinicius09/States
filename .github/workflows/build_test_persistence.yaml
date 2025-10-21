@@ -25,7 +25,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         command: server /data --console-address ":9001"
-        
+
     steps:
       # Faz checkout do código
       - name: Checkout repository
@@ -48,7 +48,6 @@ jobs:
       # Roda os testes automatizados
       - name: Run tests
         run: dotnet test ./states_persistence/States_Persistence.sln --no-build --configuration Release --verbosity normal
-
       # (Opcional) Gera relatório de cobertura
       # Ative se você quiser visualizar métricas de testes no Actions
       # - name: Run tests with coverage
