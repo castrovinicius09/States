@@ -24,7 +24,7 @@ WebApplication app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapPost("/BuscarEstados", async ([FromServices] IStatesService statesService, CancellationToken cancellationToken) =>
+app.MapPost("/BuscarListaArquivos", async ([FromServices] IStatesService statesService, CancellationToken cancellationToken) =>
 {
     Result result = await statesService.GetStatesFileNamesAsync(cancellationToken);
 
